@@ -1,7 +1,10 @@
-import React from 'react';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import React, { useState } from 'react';
+import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import App from '../App';
 import app from '../firebase.config';
+import User from './User';
+
+
 
 
 
@@ -9,12 +12,16 @@ const auth = getAuth(app)
 
 const Registration = () => {
 
+    // user 
+    const [user, setUser] = useState({})
+
     // google sign in 
     const googleProvider = new GoogleAuthProvider();
     const handleGoogleSignIn = () => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 const loggedUser = result.user
+                setUser(loggedUser)
                 console.log(loggedUser);
             })
             .catch(err => {
@@ -23,10 +30,19 @@ const Registration = () => {
     };
 
     // github sign in 
+    const gitHubProvider = new GithubAuthProvider();
     const handleGitHubSignIn = () => {
-        
+        signInWithPopup(auth, gitHubProvider)
+            .then(result => {
+                const loggedUser = result.user
+                setUser(loggedUser)
+                console.log(loggedUser)
+            })
+            .catch(err => {
+                console.log(err.message)
+            })
     }
-
+console.log(user)
     return (
         <>
             <form className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
@@ -57,8 +73,11 @@ const Registration = () => {
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Register</button>
                 </div>
             </form>
-            <button className='mt-10 flex mx-auto text-white font-semibold bg-lime-600 px-4 py-1 rounded-sm shadow-md hover:bg-lime-700 transition duration-200 ' onClick={handleGoogleSignIn} >Google</button>
-            <button className='mt-10 flex mx-auto text-white font-semibold bg-lime-600 px-4 py-1 rounded-sm shadow-md hover:bg-lime-700 transition duration-200 ' onClick={handleGitHubSignIn} >GitHub</button>
+            <div className=''>
+                <button className='mt-10 flex mx-auto text-white font-semibold bg-lime-600 px-4 py-1 rounded-sm shadow-md hover:bg-lime-700 transition duration-200 ' onClick={handleGoogleSignIn} >Google</button>
+                <button className='mt-2 mb-20 flex mx-auto text-white font-semibold bg-slate-700 px-4 py-1 rounded-sm shadow-md hover:bg-slate-500 transition duration-200 ' onClick={handleGitHubSignIn} >GitHub</button>
+            </div>
+            <div className=' container mx-auto'> <User user={user}></User></div>
         </>
     );
 };
