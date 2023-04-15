@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
-import { getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import App from '../App';
 import app from '../firebase.config';
 import User from './User';
 
 
 
-
-
 const auth = getAuth(app)
+
 
 const Registration = () => {
 
     // user 
     const [user, setUser] = useState({})
+
+    // error 
+    const [error, setError] = useState('')
+
+    // success 
+    const [success, setSuccess] = useState('')
+
 
     // google sign in 
     const googleProvider = new GoogleAuthProvider();
@@ -29,6 +35,7 @@ const Registration = () => {
             })
     };
 
+
     // github sign in 
     const gitHubProvider = new GithubAuthProvider();
     const handleGitHubSignIn = () => {
@@ -42,10 +49,61 @@ const Registration = () => {
                 console.log(err.message)
             })
     }
-console.log(user)
+
+
+
+    // create user with email and password 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const email = event.target.email.value
+        const password = event.target.password.value
+
+
+        // password validation 
+        setError('')
+        setSuccess('')
+
+        if (!/(?=.*[A-Z])/.test(password)) {
+            setError('Please provide one upperCase word')
+            return
+        }
+        else if (!/(?=.*[0-9])/.test(password)) {
+            setError('Please provide at least one number')
+            return
+        }
+        else if (password.length < 6) {
+            setError('Password must be 6 characters or above')
+            return
+        };
+
+        // create firebase user 
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(result => {
+                const loggedUser = result.user
+                setUser(loggedUser)
+                setSuccess('User Created successfully')
+                setError('')
+                
+            })
+            .catch(err => {
+                setError(err.message)
+                setSuccess('')
+            })
+            
+    }
+
+
+
+
+
+
+
+
+
+    console.log(user)
     return (
         <>
-            <form className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
                 <h2 className="text-2xl mb-6 font-medium text-gray-800">Register</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
@@ -64,6 +122,8 @@ console.log(user)
                 <div className="mt-4">
                     <label htmlFor="password" className="text-gray-700 font-medium block mb-2">Password</label>
                     <input type="password" id="password" name="password" className="border border-gray-400 p-2 w-full rounded-lg" required />
+                    <p className='font-normal text-red-500'>{error}</p>
+
                 </div>
                 <div className="mt-4">
                     <label htmlFor="confirmPassword" className="text-gray-700 font-medium block mb-2">Confirm Password</label>
@@ -73,6 +133,8 @@ console.log(user)
                     <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Register</button>
                 </div>
             </form>
+            <p className='font-normal text-green-500 text-center'>{success}</p>
+
             <div className=''>
                 <button className='mt-10 flex mx-auto text-white font-semibold bg-lime-600 px-4 py-1 rounded-sm shadow-md hover:bg-lime-700 transition duration-200 ' onClick={handleGoogleSignIn} >Google</button>
                 <button className='mt-2 mb-20 flex mx-auto text-white font-semibold bg-slate-700 px-4 py-1 rounded-sm shadow-md hover:bg-slate-500 transition duration-200 ' onClick={handleGitHubSignIn} >GitHub</button>
