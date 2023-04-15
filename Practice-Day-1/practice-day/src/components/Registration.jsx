@@ -11,6 +11,9 @@ const auth = getAuth(app)
 
 const Registration = () => {
 
+    // toggle password 
+    const [showPassword, setShowPassword] = useState(false)
+
     // user 
     const [user, setUser] = useState({})
 
@@ -121,7 +124,8 @@ const Registration = () => {
                 </div>
                 <div className="mt-4">
                     <label htmlFor="password" className="text-gray-700 font-medium block mb-2">Password</label>
-                    <input type="password" id="password" name="password" className="border border-gray-400 p-2 w-full rounded-lg" required />
+                    <input type={showPassword ? "text" : "password"} id="password" name="password" className="border border-gray-400 p-2 w-full rounded-lg" required />
+                    <p onClick={()=>setShowPassword(!showPassword)} className="bg-amber-800 w-fit text-white rounded-3xl px-2 mt-2 hover:bg-amber-600 transition duration-300 cursor-pointer">show Pass</p>
                     <p className='font-normal text-red-500'>{error}</p>
 
                 </div>
