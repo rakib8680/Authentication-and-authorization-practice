@@ -4,9 +4,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import Home from './components/Home'
 import Login from './components/Login'
+import Orders from './components/Orders'
 import UserProvider from './components/Providers/UserProvider'
 import Registration from './components/Registration'
 import './index.css'
+import PrivateRoute from './PrivateRoute'
 
 
 const router = createBrowserRouter([
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/registration',
         element: <Registration></Registration>
+      },
+      {
+        path: '/orders',
+        element: <PrivateRoute><Orders></Orders></PrivateRoute>
       }
     ]
   }

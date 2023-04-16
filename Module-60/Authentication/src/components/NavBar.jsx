@@ -4,9 +4,17 @@ import { UserContext } from './Providers/UserProvider';
 
 const NavBar = () => {
 
-  const { user, } = useContext(UserContext)
+  const { user, logOut } = useContext(UserContext)
 
+  const handleSignOut = () => {
+    logOut()
+    .then(
 
+    )
+    .catch(err=>{
+      console.log(err.message)
+    })
+  }
 
 
   return (
@@ -23,16 +31,19 @@ const NavBar = () => {
             <li className="mx-4">
               <Link to="/registration" className="text-primary hover:text-white font-medium transition duration-300 ease-in-out">Registration</Link>
             </li>
+            <li className="mx-4">
+              <Link to="/orders" className="text-primary hover:text-white font-medium transition duration-300 ease-in-out">Orders</Link>
+            </li>
           </ul>
           <div>
             {
               user ?
                 <div className='flex flex-col text-center mt-10 md:mt-0'>
                   <p>{user.email}</p>
-                  <button className='btn btn-secondary btn-xs'>Sign Out</button>
+                  <button className='btn btn-secondary btn-xs' onClick={handleSignOut}>Sign Out</button>
                 </div>
                 :
-                <Link to="/login">Login</Link>
+                <Link to="/login" className='btn btn-sm btn-secondary'>Sign In</Link>
             }
           </div>
         </div>
