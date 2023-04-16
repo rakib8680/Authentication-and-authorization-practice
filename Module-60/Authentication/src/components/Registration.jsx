@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuth
 import App from '../App';
 import app from '../firebase.config';
 import User from './User';
+import { Link } from 'react-router-dom';
 
 
 
@@ -86,13 +87,13 @@ const Registration = () => {
                 setUser(loggedUser)
                 setSuccess('User Created successfully')
                 setError('')
-                
+
             })
             .catch(err => {
                 setError(err.message)
                 setSuccess('')
             })
-            
+
     }
 
 
@@ -106,12 +107,12 @@ const Registration = () => {
     console.log(user)
     return (
         <>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-primary rounded-lg shadow-md">
                 <h2 className="text-2xl mb-6 font-medium text-gray-800">Register</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label htmlFor="firstName" className="text-gray-700 font-medium block mb-2">First Name</label>
-                        <input type="text" id="firstName" name="firstName" className="border border-gray-400 p-2 w-full rounded-lg" />
+                        <input type="text" id="firstName" name="firstName" className="border border-gray-400  p-2 w-full rounded-lg" />
                     </div>
                     <div>
                         <label htmlFor="lastName" className="text-gray-700 font-medium block mb-2">Last Name</label>
@@ -125,7 +126,7 @@ const Registration = () => {
                 <div className="mt-4">
                     <label htmlFor="password" className="text-gray-700 font-medium block mb-2">Password</label>
                     <input type={showPassword ? "text" : "password"} id="password" name="password" className="border border-gray-400 p-2 w-full rounded-lg" required />
-                    <p onClick={()=>setShowPassword(!showPassword)} className="bg-amber-800 w-fit text-white rounded-3xl px-2 mt-2 hover:bg-amber-600 transition duration-300 cursor-pointer">show Pass</p>
+                    <p onClick={() => setShowPassword(!showPassword)} className="bg-secondary w-fit text-white rounded-3xl px-2 mt-2 hover:bg-error transition duration-300 cursor-pointer">show Pass</p>
                     <p className='font-normal text-red-500'>{error}</p>
 
                 </div>
@@ -134,8 +135,9 @@ const Registration = () => {
                     <input type="password" id="confirmPassword" name="confirmPassword" className="border border-gray-400 p-2 w-full rounded-lg" />
                 </div>
                 <div className="mt-6">
-                    <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out">Register</button>
+                    <button type="submit" className="bg-secondary text-white py-2 px-4 rounded-lg hover:bg-error transition duration-300 ease-in-out">Register</button>
                 </div>
+                <Link className='btn btn-link text-neutral' to="/login">already have account ?</Link>
             </form>
             <p className='font-normal text-green-500 text-center'>{success}</p>
 
