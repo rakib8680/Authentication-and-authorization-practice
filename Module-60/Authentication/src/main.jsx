@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App'
 import Home from './components/Home'
 import Login from './components/Login'
+import UserProvider from './components/Providers/UserProvider'
 import Registration from './components/Registration'
 import './index.css'
 
@@ -30,5 +31,7 @@ const router = createBrowserRouter([
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router}></RouterProvider>
+  <UserProvider>
+    <RouterProvider router={router}></RouterProvider>
+  </UserProvider>
 )

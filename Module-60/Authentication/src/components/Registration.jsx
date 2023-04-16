@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import App from '../App';
 import app from '../firebase.config';
 import User from './User';
 import { Link } from 'react-router-dom';
@@ -104,9 +103,8 @@ const Registration = () => {
 
 
 
-    console.log(user)
     return (
-        <>
+        <div className='p-5 md:p-0'>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-primary rounded-lg shadow-md">
                 <h2 className="text-2xl mb-6 font-medium text-gray-800">Register</h2>
                 <div className="grid grid-cols-2 gap-4">
@@ -146,7 +144,7 @@ const Registration = () => {
                 <button className='mt-2 mb-20 flex mx-auto text-white font-semibold bg-slate-700 px-4 py-1 rounded-sm shadow-md hover:bg-slate-500 transition duration-200 ' onClick={handleGitHubSignIn} >GitHub</button>
             </div>
             <div className=' container mx-auto'> <User user={user}></User></div>
-        </>
+        </div>
     );
 };
 
