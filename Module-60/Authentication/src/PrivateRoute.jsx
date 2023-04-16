@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserContext } from './components/Providers/UserProvider';
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = ({ children }) => {
 
-    const {user} = useContext(UserContext);
+    const { user, loading } = useContext(UserContext);
 
-    if(user){
+    if (loading) {
+        return <progress className="  progress-error  w-72"></progress>
+    }
+
+    if (user) {
         return children
     };
     return <Navigate to="/login" replace={true}></Navigate>

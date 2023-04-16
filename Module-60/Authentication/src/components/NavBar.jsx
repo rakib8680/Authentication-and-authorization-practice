@@ -8,12 +8,12 @@ const NavBar = () => {
 
   const handleSignOut = () => {
     logOut()
-    .then(
+      .then(
 
     )
-    .catch(err=>{
-      console.log(err.message)
-    })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
 
@@ -31,9 +31,12 @@ const NavBar = () => {
             <li className="mx-4">
               <Link to="/registration" className="text-primary hover:text-white font-medium transition duration-300 ease-in-out">Registration</Link>
             </li>
-            <li className="mx-4">
-              <Link to="/orders" className="text-primary hover:text-white font-medium transition duration-300 ease-in-out">Orders</Link>
-            </li>
+            {
+              user &&
+              <li className="mx-4">
+                <Link to="/orders" className="text-primary hover:text-white font-medium transition duration-300 ease-in-out">Orders</Link>
+              </li>
+            }
           </ul>
           <div>
             {
