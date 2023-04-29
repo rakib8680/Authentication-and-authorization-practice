@@ -22,7 +22,18 @@ app.get('/news', (req, res) => {
 
 app.get('/news/:id', (req, res) => {
     const id = req.params.id;
-    res.send(news.filter(item => item._id === id));
+    res.send(news.find(item => item._id === id));
+})
+
+app.get('/categories/:id', (req, res) => {
+    const id = req.params.id;
+    if (id == 0) {
+        res.send(news);
+    }
+    else {
+        const categoryNews = news.filter(item => item.category_id === id)
+        res.send(categoryNews)
+    }
 })
 
 
