@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import About from "../components/About";
+import Contact from "../components/Contact";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Services from "../components/Services";
@@ -20,6 +22,14 @@ const route = createBrowserRouter([
             {
                 path: "register",
                 element: <Register></Register>
+            },
+            {
+                path : 'about',
+                element : <About></About>
+            },
+            {
+                path : 'contact',
+                element : <Contact></Contact>
             }
         ]
     },
@@ -38,6 +48,7 @@ const route = createBrowserRouter([
             }
         ]
     }
+
 ]);
 
 
