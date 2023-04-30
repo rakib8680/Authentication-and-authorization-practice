@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Services from "../components/Services";
@@ -30,7 +29,8 @@ const route = createBrowserRouter([
         children: [
             {
                 path: "/services",
-                element: <Services></Services>
+                element: <Services></Services>,
+                loader: () => fetch('http://localhost:5000/allServices')
             },
             {
                 path: ":id",
@@ -41,4 +41,4 @@ const route = createBrowserRouter([
 ]);
 
 
-export default route ;
+export default route;
