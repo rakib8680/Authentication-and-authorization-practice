@@ -1,12 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import About from "../components/About";
 import Contact from "../components/Contact";
+import ErrorPage from "../components/ErrorPage";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Services from "../components/Services";
 import ServicesDetails from "../components/ServicesDetails";
 import LoginLayout from "../layout/LoginLayout";
 import ServicesLayout from "../layout/ServicesLayout";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -14,6 +16,7 @@ const route = createBrowserRouter([
     {
         path: "/",
         element: <LoginLayout></LoginLayout>,
+        errorElement : <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "login",
@@ -24,12 +27,12 @@ const route = createBrowserRouter([
                 element: <Register></Register>
             },
             {
-                path : 'about',
-                element : <About></About>
+                path: 'about',
+                element: <About></About>
             },
             {
-                path : 'contact',
-                element : <Contact></Contact>
+                path: 'contact',
+                element: <Contact></Contact>
             }
         ]
     },
@@ -44,7 +47,10 @@ const route = createBrowserRouter([
             },
             {
                 path: ":id",
-                element: <ServicesDetails></ServicesDetails>
+                element:
+                    <PrivateRoute>
+                        <ServicesDetails></ServicesDetails>
+                    </PrivateRoute>,
             }
         ]
     }

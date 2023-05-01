@@ -4,7 +4,13 @@ import { AuthContext } from '../providers/AuthProvider';
 
 const Header = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOutUser } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOutUser()
+            .then(() => console.log('logged Out Successfully'))
+            .catch(err => console.log(err.message))
+    }
 
     return (
         <header className="bg-gray-800">
@@ -33,8 +39,8 @@ const Header = () => {
                         {
                             user ?
                                 <div className='flex items-center'>
-                                <p className='text-white'>{user?.email}</p>
-                                <button className='text-slate-800 font-medium ms-2 px-2 rounded-md hover:bg-red-500 hover:text-slate-100 transition-all duration-300 bg-slate-200'>LogOut</button>
+                                    <p className='text-white'>{user?.email}</p>
+                                    <button className='text-slate-800 font-medium ms-2 px-2 rounded-md hover:bg-red-500 hover:text-slate-100 transition-all duration-300 bg-slate-200' onClick={handleLogOut}>LogOut</button>
                                 </div>
                                 :
                                 <>
