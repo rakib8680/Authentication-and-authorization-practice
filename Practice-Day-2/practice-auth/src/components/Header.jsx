@@ -28,7 +28,7 @@ const Header = () => {
                         <Link to="/services" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
                             Home
                         </Link>
-                        <Link to="/about" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4">
+                        <Link to="/about" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white mr-4 ">
                             About
                         </Link>
                         <Link to="/contact" className="block mt-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white">

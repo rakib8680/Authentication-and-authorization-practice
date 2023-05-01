@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import ErrorPage from "../components/ErrorPage";
+import Hero from "../components/Hero";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Services from "../components/Services";
@@ -16,8 +17,12 @@ const route = createBrowserRouter([
     {
         path: "/",
         element: <LoginLayout></LoginLayout>,
-        errorElement : <ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
+            {
+                path : '/',
+                element : <Hero></Hero>
+            },
             {
                 path: "login",
                 element: <Login></Login>
@@ -51,6 +56,7 @@ const route = createBrowserRouter([
                     <PrivateRoute>
                         <ServicesDetails></ServicesDetails>
                     </PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/allServices/${params.id}`)
             }
         ]
     }

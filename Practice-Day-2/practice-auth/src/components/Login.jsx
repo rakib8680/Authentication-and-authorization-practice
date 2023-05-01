@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Login = () => {
     const { signInUser } = useContext(AuthContext)
     const [success, setSuccess] = useState('')
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
+    const location = useLocation()
     const handleSignIn = event => {
         event.preventDefault();
         setSuccess('')
@@ -20,7 +20,7 @@ const Login = () => {
                 const loggedUser = result.user
                 console.log(loggedUser)
                 setSuccess('Logged in successfully')
-                navigate('/services')
+                navigate(location?.state?.from.pathname || '/services')
 
             })
             .catch(err => console.log(err.message))
@@ -37,7 +37,7 @@ const Login = () => {
                         Email
                     </label>
                     <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline-gray"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline-gray"
                         id="email"
                         type="text"
                         name='email'

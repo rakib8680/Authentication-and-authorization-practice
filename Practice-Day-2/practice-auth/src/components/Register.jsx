@@ -116,6 +116,14 @@ const Register = () => {
                         Register
                     </button>
                 </div>
+                <div className="mt-5 text-xs">
+                    <p className="inline-block align-baseline text-slate-300 mr-3">
+                        Already have an account ?
+                    </p>
+                    <a href="/login" className="text-blue-500 hover:text-blue-800 text-xs"  >
+                        Login here.
+                    </a>
+                </div>
             <p className='text-green-500 relative top-5 text-center'>{success}</p>
             </form>
         </div>
