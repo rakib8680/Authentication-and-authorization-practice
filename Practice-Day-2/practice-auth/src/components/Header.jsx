@@ -5,7 +5,6 @@ import { AuthContext } from '../providers/AuthProvider';
 const Header = () => {
 
     const { user } = useContext(AuthContext)
-    console.log(user)
 
     return (
         <header className="bg-gray-800">
@@ -34,7 +33,7 @@ const Header = () => {
                         {
                             user ?
                                 <div className='flex items-center'>
-                                <p className='text-white'>{user?.name}</p>
+                                <p className='text-white'>{user?.email}</p>
                                 <button className='text-slate-800 font-medium ms-2 px-2 rounded-md hover:bg-red-500 hover:text-slate-100 transition-all duration-300 bg-slate-200'>LogOut</button>
                                 </div>
                                 :
@@ -42,7 +41,7 @@ const Header = () => {
                                     <Link to="/login" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0">
                                         Login
                                     </Link>
-                                    <Link to="/register" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0">
+                                    <Link to="/register" className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-gray-800 hover:bg-white mt-4 lg:mt-0 ms-2">
                                         Register
                                     </Link>
                                 </>

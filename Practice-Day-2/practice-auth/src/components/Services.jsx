@@ -7,11 +7,8 @@ import { Link, useLoaderData } from "react-router-dom";
 
 
 const Services = () => {
-    // const [servicesData, setServicesData] = useState([]);
+    
     const { services } = useLoaderData()
-
-    // const {} = services
-    console.log(services[0]);
 
     return (
         <div className="container mx-auto bg-slate-50  py-20">
